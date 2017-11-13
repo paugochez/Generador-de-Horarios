@@ -52,13 +52,10 @@ def available_curses(carne, passw, visible=False, close=True):
         print(each_career.get_attribute('value'))
 	each_career.click()
 	wait_until_class_is_located(driver,'data')
-	#courses_dropdown=driver.find_element_by_xpath("/html/body/div[@id='all']/div[@id='ct']/table[@class='data']/tbody/tr[2]/td[@class='row2'][2]")
-	#courses_dropdown=driver.find_element_by_tag_name('tr')
-	courses_dropdown= driver.find_element_by_xpath("/html/body/div[@id='all']/div[@id='ct']/table[@class='data']/tbody/tr/*")
-	print("Here i am")
-	courses=[x for x in courses_dropdown.find_elements_by_tag_name('td')]
-	for each_course in courses: 
-		print(each_course.get_attrubute('class'))   	
+        table=driver.find_element_by_class_name("data")
+        body= table.find_element_by_xpath("//tbody")
+        tr = [x for x in body.find_elements_by_xpath("//tr")[1:]]
+        print ("I found the table and the body ")
 
     # Quit the browser
     if close:
