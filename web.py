@@ -48,15 +48,29 @@ def available_curses(carne, passw, visible=False, close=True):
     careers = [x for x in career_dropdown.find_elements_by_tag_name('option')[1:]]
     
     for each_career in careers:
-        print(each_career.get_attribute('innerHTML'))
+        print(each_career.get_attribute('innerHTML')) 
         print(each_career.get_attribute('value'))
 	each_career.click()
 	wait_until_class_is_located(driver,'data')
         table=driver.find_element_by_class_name("data")
         body= table.find_element_by_xpath("//tbody")
         tr = [x for x in body.find_elements_by_xpath("//tr")[1:]]
-        print ("I found the table and the body ")
-
+        cambio=0
+        each_tr= tr[0]
+        my_courses = []
+        for data in each_tr.find_elements_by_xpath("//td"):
+            my_courses.append(data.get_attribute('innerHTML').strip())
+                        
+        print ("Los cursos se descargaron exitosamente. Cantidad de cursos faltantes" + len(tr))
+        
+        clean_courses=[]
+        for i in range(0,len(tr)):
+            new_Subject = Subject()
+            new_Subject.sigla = my_courses[i*5]
+            new_Subject.curso = my_courses[i*5+1]
+            new_Subject.creditos = my_courses[i*5+2]
+            clean_courses.append(new_Subject)
+                    
     # Quit the browser
     if close:
         driver.quit()
@@ -65,7 +79,7 @@ def available_curses(carne, passw, visible=False, close=True):
     if not visible:
         vdisplay.stop()
 
-def wait_until_title_contains(driver, piece, timeout=10):
+def wait_until_title_contains(driver, piece, timeout=20):
     """
     Wait until the title contains the piece.
     Default timeout will be 10 seconds.
@@ -83,7 +97,7 @@ def wait_until_title_contains(driver, piece, timeout=10):
         # Log succesfully                                                      
         print("Loaded page that contains '"+piece+"' succesfully...")
     
-def wait_until_element_is_located(driver, element_id, timeout=10):
+def wait_until_element_is_located(driver, element_id, timeout=20):
     """
     Wait until the element is located in the driver.
     Default timeout will be 10 seconds.
@@ -96,7 +110,7 @@ def wait_until_element_is_located(driver, element_id, timeout=10):
     finally:
         print("Loaded page that contains '"+element_id+"' succesfully...")
 
-def wait_until_class_is_located(driver, element_class, timeout=10):
+def wait_until_class_is_located(driver, element_class, timeout=20):
     """
     Wait until the element is located in the driver.
     Default timeout will be 10 seconds.
@@ -108,3 +122,9 @@ def wait_until_class_is_located(driver, element_class, timeout=10):
         )
     finally:
         print("Loaded page that contains '"+element_class+"' succesfully...")
+
+class Subject: #Object that contains subject elements
+    sigla = ""
+    curso = ""
+    creditos = 0
+
