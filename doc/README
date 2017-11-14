@@ -1,0 +1,24 @@
+----------------------------------------------------------------------
+
+			Generador de horarios
+
+----------------------------------------------------------------------
+
+Este es  un programa para  ingresar a la  pagina de E-matricula  de la
+Universidad de Costa Rica, descargar  las materias que tiene pendiente
+de su  plan de  estudio, y  generar un horario  en base  a la  guia de
+cursos  y   horarios  que   se  esten   ofreciendo,  para   este  caso
+especificamente como un  documento de texto. El  generador de horarios
+es la continuacion del proyecto Claymore, iniciado en junio del 2017.
+
+El programa utiliza python3 con  selenium web driver para manipular la
+pagina de  acceso y parsear el  html. Al ser un  programa externo debe
+ser instalado  en la computadora  para su correcto  funcionamiento, el
+cual puede ser encontrado en: http://www.seleniumhq.org/download/.
+
+Posterior a esto desde  C++ se llama al programa de  python con bash y
+se crea un archivo .txt con  los cursos restantes del plan de estudios
+y con ello  se genera las distintas opciones de  horario, basado en la
+cantidad de creditos y los cursos que desea llevar.
+
+13 Noviembre, 2017
