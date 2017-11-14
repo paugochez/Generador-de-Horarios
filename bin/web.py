@@ -11,23 +11,22 @@ import pickle
 import sys
 
 
-def available_curses(carne, passw, visible=True, close=True):
+def  available_curses(carne,  passw,  visible=True,  close=True):
     """
-    Enters ematricula.ucr.ac.cr and then
-    goes to the section that has the information
-    about available careers.
+    Enters ematricula.ucr.ac.cr and downloads  the courses left in the
+    plan
 
     Example usage:
 
-    Launch a invisible browser and get the curses.
-    -> available_curses('b53777', 'mypassword')
+    Launch   a   invisible   browser   and   get   the   curses.    ->
+    available_curses('b53777', 'mypassword')
     
-    Launch a visible browser to see step by step what is done.
-    -> available_curses('b53777', 'mypassword', visible=True)
+    Launch a  visible browser to  see step by  step what is  done.  ->
+    available_curses('b53777', 'mypassword', visible=True)
 
-    Launch a visible browser and don't close when finished.
-    -> available_curses('b53777', 'mypassword', visible=True, close=False)
-    """
+    Launch  a  visible browser  and  don't  close when  finished.   ->
+    available_curses('b53777',       'mypassword',       visible=True,
+    close=False) """
 
     # Create and start a virtualdisplay
     vdisplay = Xvfb()
@@ -76,9 +75,7 @@ def available_curses(carne, passw, visible=True, close=True):
             new_Subject.creditos = my_courses[i*5+2]
             clean_courses.append(new_Subject)
             file.write(my_courses[i*5] +'\t'+ my_courses[i*5+1] +'\t'+my_courses[i*5+2]+"\n")
-            #print (my_courses[i*5])
-            #print (my_courses[i*5+1])
-            #print (my_courses[i*5+2])             
+                
             
         file.close() 
     # Quit the browser
