@@ -7,8 +7,11 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import WebDriverException
 from xvfbwrapper import Xvfb
 from bs4 import BeautifulSoup
+import pickle
+import sys
 
-def available_curses(carne, passw, visible=False, close=True):
+
+def available_curses(carne, passw, visible=True, close=True):
     """
     Enters ematricula.ucr.ac.cr and then
     goes to the section that has the information
@@ -50,8 +53,8 @@ def available_curses(carne, passw, visible=False, close=True):
     for each_career in careers:
         print(each_career.get_attribute('innerHTML')) 
         print(each_career.get_attribute('value'))
-	each_career.click()
-	wait_until_class_is_located(driver,'data')
+        each_career.click()
+        wait_until_class_is_located(driver,'data')
         table=driver.find_element_by_class_name("data")
         body= table.find_element_by_xpath("//tbody")
         tr = [x for x in body.find_elements_by_xpath("//tr")[1:]]
@@ -61,16 +64,26 @@ def available_curses(carne, passw, visible=False, close=True):
         for data in each_tr.find_elements_by_xpath("//td"):
             my_courses.append(data.get_attribute('innerHTML').strip())
                         
-        print ("Los cursos se descargaron exitosamente. Cantidad de cursos faltantes" + len(tr))
+        print ("Los cursos se descargaron exitosamente. Cantidad de cursos faltantes")
+        print (len(tr))
         
         clean_courses=[]
+        file = open("cursos.txt","w")
         for i in range(0,len(tr)):
             new_Subject = Subject()
             new_Subject.sigla = my_courses[i*5]
             new_Subject.curso = my_courses[i*5+1]
             new_Subject.creditos = my_courses[i*5+2]
             clean_courses.append(new_Subject)
-                    
+            file.write("Materia")
+            file.write(my_courses[i*5])
+            #print (my_courses[i*5+1])
+            #print (my_courses[i*5+2])
+            #print (my_courses[i*5])
+            #print (my_courses[i*5+1])
+            #print (my_courses[i*5+2])             
+            
+        file.close() 
     # Quit the browser
     if close:
         driver.quit()
@@ -127,4 +140,5 @@ class Subject: #Object that contains subject elements
     sigla = ""
     curso = ""
     creditos = 0
+
 
