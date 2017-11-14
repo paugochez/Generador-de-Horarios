@@ -86,7 +86,7 @@ vector<subject> trimFiles(string txtName){
 
 int main() {
 
-  system("python3 ./bin/web_main.py b53375 @Manati666"); //bash call to run python underneath to obtain coursesLeft
+  system("python3 ./bin/web_main.py Carnet Contrasena"); //bash call to run python underneath to obtain coursesLeft
   
   vector<subject> subjectsLeft;
 
