@@ -62,16 +62,16 @@ vector<subject*> trimFiles(string txtName){
 	      cout << "\t Nombre:" << token << endl;
 	    }
 	    if (count == 2){
-	      cout << "\t error obteniendo creditos \n";
+	      newSubject->creditos = stoi(token);
+	      cout << "\t Creditos:" << newSubject->creditos << " \n";
 	    }
-	      //newSubject->creditos = atoi(token);
+	     
 	    line.erase(0, pos + delimiter.length());
 	    count+=1;
 	    
 	    if (count == limit){
 	      count = 0;
 	      subjectsLeft.push_back(newSubject);
-	      cout << "Size: "<< subjectsLeft.size();
 	    }
 	  }
 	}
@@ -94,6 +94,8 @@ int main() {
   subjectsLeft = trimFiles("cursos.txt");
 
   cout << "Size: "<< subjectsLeft.size();
+
+  
 
   //cout << "La sigla del primer curso es" << subjectsLeft[0].sigla << endl ;
   return 0;
