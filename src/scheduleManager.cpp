@@ -30,8 +30,8 @@ vector<timeTable> timeTableGenerator (vector<subject> classesLeft, int creditos,
 }
 
 // Function to trim .txt that contains subjects left
-vector<subject> trimFiles(string txtName){
-  vector<subject> subjectsLeft;
+vector<subject*> trimFiles(string txtName){
+  vector<subject*> subjectsLeft;
   string line;
   ifstream myfile (txtName);
 
@@ -39,7 +39,7 @@ vector<subject> trimFiles(string txtName){
     {
       while ( getline (myfile,line) )
 	{
-	  subject newSubject;
+	  subject *newSubject = new subject;
 	  string delimiter = "\t";
 	  size_t pos = 0;
 	  string token;
@@ -47,23 +47,24 @@ vector<subject> trimFiles(string txtName){
 	  
 	  cout <<" Materia:" << endl;
 	  
-	  while ((pos = line.find(delimiter)) != "\n") {  //Loop to trim .txt
+	  while ((pos = line.find(delimiter)) != string::npos) {  //Loop to trim .txt
 
+	    
 	    int limit = 3;  
 	    token = line.substr(0, pos);
 	    
 	    if (count == 0){
-	      newSubject.sigla = token;
+	      newSubject->sigla = token;
 	      cout << "\t Sigla:" << token << endl;
 	    }
 	    if (count == 1){
-	      newSubject.nombre = token;
+	      newSubject->nombre = token;
 	      cout << "\t Nombre:" << token << endl;
 	    }
 	    if (count == 2){
-	      cout << "\t error obteniendo creditos";
+	      cout << "\t error obteniendo creditos \n";
 	    }
-	      //newSubject.creditos = atoi(token);
+	      //newSubject->creditos = atoi(token);
 	    line.erase(0, pos + delimiter.length());
 	    count+=1;
 	    
@@ -86,9 +87,9 @@ vector<subject> trimFiles(string txtName){
 
 int main() {
 
-  system("python3 ./bin/web_main.py Carnet Contrasena"); //bash call to run python underneath to obtain coursesLeft
+  system("python3 ./bin/web_main.py b53375 @Manati666"); //bash call to run python underneath to obtain coursesLeft
   
-  vector<subject> subjectsLeft;
+  vector<subject*> subjectsLeft;
 
   subjectsLeft = trimFiles("cursos.txt");
 
