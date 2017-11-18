@@ -14,19 +14,11 @@ import sys
 def  available_curses(carne,  passw,  visible=True,  close=True):
     """
     Enters ematricula.ucr.ac.cr and downloads  the courses left in the
-    plan
+    plan and creates a .txt file with them
 
-    Example usage:
+    """
 
-    Launch   a   invisible   browser   and   get   the   curses.    ->
-    available_curses('b53777', 'mypassword')
-    
-    Launch a  visible browser to  see step by  step what is  done.  ->
-    available_curses('b53777', 'mypassword', visible=True)
-
-    Launch  a  visible browser  and  don't  close when  finished.   ->
-    available_curses('b53777',       'mypassword',       visible=True,
-    close=False) """
+  
 
     # Create and start a virtualdisplay
     vdisplay = Xvfb()
@@ -74,7 +66,7 @@ def  available_curses(carne,  passw,  visible=True,  close=True):
             new_Subject.curso = my_courses[i*5+1]
             new_Subject.creditos = my_courses[i*5+2]
             clean_courses.append(new_Subject)
-            file.write(my_courses[i*5] +'\t'+ my_courses[i*5+1] +'\t'+my_courses[i*5+2]+"\n")
+            file.write(my_courses[i*5] +'\t'+ my_courses[i*5+1] +'\t'+my_courses[i*5+2]+"\t \n")
                 
             
         file.close() 
